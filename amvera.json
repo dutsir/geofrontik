@@ -1,0 +1,17 @@
+{
+  "name": "geoshtychechka",
+  "type": "static",
+  "build": {
+    "command": "npm run build",
+    "output": "dist"
+  },
+  "routes": [
+    {
+      "path": "/(.*)",
+      "rewrite": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "https://.amvera.io"
+  }
+} 

@@ -1,0 +1,654 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #2c3e50;
+  font-size: 2.5rem;
+  font-weight: 600;
+  animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s backwards;
+  position: relative;
+  padding: 0 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title::after {
+  content: '';
+  display: block;
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, #4a90e2, #357abd);
+  margin: 15px auto;
+  border-radius: 2px;
+  animation: widthGrow 1s ease-in-out forwards;
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+@keyframes widthGrow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 120px;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filters {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 2;
+}
+
+.filterContainer {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  z-index: 1000;
+}
+
+.searchContainer {
+  width: 100%;
+  position: relative;
+  z-index: 999;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 16px;
+  background-color: #f8f9fa;
+}
+
+.select {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 16px;
+  background-color: #fff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234a90e2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.select[size]:not([size="1"]) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 1001;
+  background: white;
+  border: 2px solid #4a90e2;
+  border-radius: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  margin: 0;
+  padding: 8px 0;
+}
+
+.select option {
+  padding: 12px 16px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  min-height: 44px;
+  border: none;
+  margin: 0;
+}
+
+.select option:hover,
+.select option:focus {
+  background-color: #f0f7ff !important;
+  color: #4a90e2;
+}
+
+/* Стили для скроллбара */
+.select::-webkit-scrollbar {
+  width: 10px;
+}
+
+.select::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 6px;
+}
+
+.select::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 6px;
+  border: 2px solid #f1f1f1;
+}
+
+.select::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Мобильные стили */
+@media (max-width: 768px) {
+  .filters {
+    padding: 20px;
+    margin-bottom: 30px;
+    gap: 15px;
+  }
+
+  .filterContainer {
+    margin-bottom: 0;
+  }
+
+  .select[size]:not([size="1"]) {
+    max-height: 250px;
+    border-radius: 12px;
+    top: calc(100% + 4px);
+    padding: 6px 0;
+  }
+
+  .select option {
+    padding: 14px 16px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .select {
+    font-size: 13px;
+    padding: 8px 30px 8px 10px;
+  }
+
+  .select[size] {
+    max-height: 220px;
+  }
+
+  .select option {
+    padding: 10px;
+    font-size: 13px;
+    min-height: 40px;
+  }
+}
+
+/* Стили для iOS */
+@supports (-webkit-touch-callout: none) {
+  .select {
+    font-size: 16px;
+  }
+
+  .select option {
+    font-size: 16px;
+  }
+}
+
+/* Стили для Android */
+@supports not (-webkit-touch-callout: none) {
+  .select option:active {
+    background-color: #e6f0ff !important;
+  }
+}
+
+.dateRangeContainer {
+  display: flex;
+  gap: 10px;
+  min-width: 300px;
+}
+
+.dateInput {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+}
+
+.dateInput:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+  background-color: #fff;
+}
+
+.cardsContainer {
+  position: relative;
+  z-index: 1;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.4s backwards;
+}
+
+.cardsContainer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table th,
+.table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #2c3e50;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table tr {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.table tr:hover {
+  background-color: #f5f7fa;
+  transform: translateX(5px);
+}
+
+.statusSelect {
+  padding: 8px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.statusSelect:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+  background-color: #fff;
+}
+
+.viewButton,
+.deleteButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-right: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.viewButton::before,
+.deleteButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.viewButton {
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  color: white;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+}
+
+.viewButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.3);
+}
+
+.viewButton:hover::before {
+  opacity: 1;
+}
+
+.deleteButton {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+}
+
+.deleteButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.3);
+}
+
+.deleteButton:hover::before {
+  opacity: 1;
+}
+
+.loading,
+.error,
+.noResults {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin: 20px 0;
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.error {
+  color: #dc3545;
+  background-color: #fff3f3;
+  border: 2px solid #dc3545;
+}
+
+.noResults {
+  color: #666;
+  background-color: #f8f9fa;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 10px;
+    margin-top: 60px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+
+  .filters {
+    padding: 15px;
+    margin-bottom: 15px;
+    gap: 10px;
+  }
+
+  .filterContainer {
+    width: 100%;
+  }
+
+  .select {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 35px 10px 12px;
+    background-position: right 10px center;
+    background-size: 14px;
+  }
+
+  /* Стили для мобильных устройств */
+  .select {
+    max-height: 40px;
+  }
+
+  /* Стили для открытого списка */
+  .select:focus {
+    max-height: none;
+  }
+
+  /* Стили для опций */
+  .select option {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  /* Кастомные стили для мобильного селекта */
+  select.select {
+    background-color: #f8f9fa;
+  }
+
+  /* Стили для Android */
+  @supports (-webkit-appearance: none) {
+    .select {
+      background-color: #f8f9fa;
+    }
+    
+    .select:focus {
+      background-color: #fff;
+    }
+  }
+
+  /* Стили для iOS */
+  @supports (-webkit-touch-callout: none) {
+    .select {
+      font-size: 16px;
+      padding-right: 35px;
+    }
+  }
+
+  .searchContainer {
+    width: 100%;
+  }
+
+  .searchInput {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 16px;
+    background-color: #f8f9fa;
+  }
+
+  .table {
+    display: block;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tbody {
+    display: block;
+  }
+
+  .table tr {
+    display: block;
+    background: white;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .table tr:hover {
+    transform: none;
+  }
+
+  .table td {
+    display: block;
+    padding: 0.5rem 0;
+    border: none;
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 45%;
+    text-align: left;
+    font-weight: 600;
+    color: #666;
+  }
+
+  .table td:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .viewButton,
+  .deleteButton {
+    width: calc(50% - 8px);
+    margin: 4px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px 10px;
+    margin-top: 60px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .filters {
+    padding: 10px;
+  }
+
+  .filterContainer {
+    margin: 0;
+  }
+
+  .select {
+    font-size: 13px;
+    padding: 8px 30px 8px 10px;
+  }
+
+  .select option {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .table td {
+    font-size: 13px;
+    padding: 0.4rem 0;
+    padding-left: 45%;
+  }
+
+  .table td::before {
+    font-size: 13px;
+  }
+
+  .viewButton,
+  .deleteButton {
+    font-size: 13px;
+    padding: 8px;
+    width: calc(50% - 6px);
+    margin: 3px;
+  }
+
+  .table tr {
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* Стили для нативного выпадающего списка на мобильных устройствах */
+@media (max-width: 768px) {
+  select.select {
+    position: relative;
+    z-index: 1000;
+  }
+
+  /* Стили для открытого списка на Android */
+  @supports (-webkit-appearance: none) {
+    select.select:focus {
+      position: relative;
+    }
+
+    select.select option {
+      position: relative;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+  }
+
+  /* Стили для iOS */
+  @supports (-webkit-touch-callout: none) {
+    select.select {
+      max-height: 250px;
+    }
+  }
+}
+
+/* Стили для iOS */
+@supports (-webkit-touch-callout: none) {
+  .select {
+    font-size: 16px;
+    padding-right: 35px;
+  }
+}
+
+/* Стили для Android */
+@supports (-webkit-appearance: none) and (not (-webkit-touch-callout: none)) {
+  .select {
+    background-color: #f8f9fa;
+  }
+  
+  .select option {
+    background-color: white;
+  }
+}
+
+/* Стили для Firefox */
+@-moz-document url-prefix() {
+  .select {
+    text-overflow: ellipsis;
+    padding-right: 30px;
+  }
+  
+  .select option {
+    padding: 8px 12px;
+  }
+} 

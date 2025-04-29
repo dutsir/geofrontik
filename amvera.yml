@@ -1,0 +1,16 @@
+meta:
+  environment: node
+  version: 18
+
+build:
+  artifacts:
+    - build
+  commands:
+    - npm install
+    - npm run build
+
+run:
+  command: npm run dev
+  static:
+    - path: /build
+      root: build 
