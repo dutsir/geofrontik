@@ -31,12 +31,12 @@ const MapPage: React.FC = () => {
 
 
   useEffect(() => {
-    if (!isLoaded || !ymaps || !mapRef.current || mapInitialized.current) return;
+    if (!isLoaded || !ymaps || mapInitialized.current) return;
 
     const initMap = () => {
       try {
         ymaps.ready(() => {
-          if (!mapRef.current) return;
+          if (!mapRef.current || mapInitialized.current) return;
           
           const newMap = new ymaps.Map(mapRef.current, {
             center: [43.066, 131.926], 

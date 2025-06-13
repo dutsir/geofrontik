@@ -1,53 +1,41 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import './AuthStatus.css';
 
 interface AuthStatusProps {
   isAuthenticated: boolean;
-  userEmail?: string;
-  userRole?: string;
+  user?: {
+    email: string;
+    role: string;
+  };
+  onLogin: () => void;
   onLogout: () => void;
 }
 
-const AuthStatus: React.FC<AuthStatusProps> = ({ isAuthenticated, userEmail, userRole, onLogout }) => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log('AuthStatus props:', { isAuthenticated, userEmail, userRole });
-  }, [isAuthenticated, userEmail, userRole]);
-
-  const handleLogin = () => {
-    navigate('/login');
+const AuthStatus: React.FC<AuthStatusProps> = ({ isAuthenticated, user, onLogin, onLogout }) => {
+  const getInitials = (email: string) => {
+    return email.split('@')[0].slice(0, 2).toUpperCase();
   };
 
-  const getInitial = (email: string) => {
-    return email.charAt(0).toUpperCase();
-  };
-
-  if (isAuthenticated && userEmail) {
-    return (
-      <div className="auth-status">
+  return (
+    <div className="auth-status">
+      {isAuthenticated && user ? (
         <div className="user-info">
-          <div className="user-avatar" title={userEmail}>
-            {getInitial(userEmail)}
+          <div className="user-avatar">
+            {getInitials(user.email)}
           </div>
           <div className="user-details">
-            <span className="user-email">{userEmail}</span>
-            {userRole && <span className="user-role">{userRole}</span>}
+            <span className="user-email">{user.email}</span>
+            <span className="user-role">{user.role}</span>
           </div>
           <button className="logout-button" onClick={onLogout}>
             Выйти
           </button>
         </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="auth-status">
-      <button className="login-button" onClick={handleLogin}>
-        Войти
-      </button>
+      ) : (
+        <button className="login-button" onClick={onLogin}>
+          Войти
+        </button>
+      )}
     </div>
   );
 };

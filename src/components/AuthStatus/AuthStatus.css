@@ -173,4 +173,36 @@
 
 .user-details {
   animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@media (max-width: 768px) {
+  .user-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .user-avatar {
+    display: none;
+  }
+
+  .user-details {
+    opacity: 1;
+    transform: none;
+    align-items: center;
+  }
+
+  .user-email {
+    display: none;
+  }
+
+  .user-role {
+    margin-bottom: 0.5rem;
+  }
+
+  .login-button,
+  .logout-button {
+    padding: 0.5rem 1rem;
+    font-size: 13px;
+  }
 } 

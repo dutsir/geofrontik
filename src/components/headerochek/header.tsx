@@ -39,6 +39,9 @@ const Headerochek: React.FC<HeaderochekProps> = ({ userRole, isAuthenticated, us
             <Link to="/survey" className={styles.navLink} onClick={closeMenu}>
               Заполнить карточку
             </Link>
+            <Link to="/info" className={styles.navLink} onClick={closeMenu}>
+           Гид по ГГС
+            </Link>
             <Link to="/admin" className={styles.navLink} onClick={closeMenu}>
               Админ панель
             </Link>
@@ -55,9 +58,9 @@ const Headerochek: React.FC<HeaderochekProps> = ({ userRole, isAuthenticated, us
           <div className={styles.authContainer}>
             <AuthStatus 
               isAuthenticated={isAuthenticated}
-              userEmail={userEmail}
-              userRole={userRole}
+              user={userEmail && userRole ? { email: userEmail, role: userRole } : undefined}
               onLogout={onLogout}
+              onLogin={() => {}}
             />
           </div>
         </nav>

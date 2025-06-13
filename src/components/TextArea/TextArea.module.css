@@ -60,6 +60,31 @@
   }
 }
 
+.helpIcon {
+  margin-left: 8px;
+  color: #4a90e2;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4a90e2;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e6f2ff;
+  box-shadow: 0 2px 5px rgba(74, 144, 226, 0.2);
+}
+
+.helpIcon:hover {
+  color: #357abd;
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+}
+
 .textarea {
   width: 100%;
   min-height: 120px;
@@ -192,4 +217,12 @@
     padding: 10px 14px;
     font-size: 12px;
   }
+}
+
+.span_forthefirsttry_goih {
+  /* Your original styles for span_forthefirsttry_goih */
+}
+
+.label_1_gointhestreet_tu_io {
+  /* Your original styles for label_1_gointhestreet_tu_io */
 }

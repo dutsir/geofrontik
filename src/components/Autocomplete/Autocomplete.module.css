@@ -4,6 +4,7 @@
   animation: slideUp 0.5s ease-in-out;
   animation-fill-mode: backwards;
 
+
 }
 
 @keyframes slideUp {
@@ -123,7 +124,7 @@
   border-radius: 12px;
   margin-top: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  z-index: 9999;
+  z-index: 9999213;
   animation: fadeIn 0.3s ease-in-out;
 }
 

@@ -13,6 +13,7 @@ import MapPage from './components/screenochki/map/map_page';
 import AdminPage from './components/screenochki/Admin/admin_page';
 import NoAccessPage from './components/screenochki/NoAccess/no_access_page';
 import CardViewPage from './components/screenochki/Cardfilin/card_view_page';
+import InfoPage from './components/screenochki/Info/InfoPage';
 import { MapProvider } from './contexts/MapContext';
 
 const publicRoutes = ['/login', '/registration'];
@@ -194,6 +195,7 @@ const AppContent: React.FC = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/card/:id" element={<CardViewPage />} />
+          <Route path="/info" element={<InfoPage />} />
           <Route 
             path="/admin" 
             element={

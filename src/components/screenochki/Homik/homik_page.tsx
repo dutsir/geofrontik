@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './homik_page.module.css';
+import AnimatedFeatures from './AnimatedFeatures';
 
 const HomikPage: React.FC = () => {
   const [visitCount, setVisitCount] = useState<number>(0);
 
   useEffect(() => {
-  
     const sendVisitData = async () => {
       try {
         const response = await fetch('http://localhost:5173/api/visits', {
@@ -28,7 +28,6 @@ const HomikPage: React.FC = () => {
       }
     };
 
-   
     const fetchVisitCount = async () => {
       try {
         const response = await fetch('http://localhost:5173/api/visits');
@@ -41,7 +40,6 @@ const HomikPage: React.FC = () => {
       }
     };
 
-  
     fetchVisitCount();
     sendVisitData();
   }, []);
@@ -56,21 +54,8 @@ const HomikPage: React.FC = () => {
         <p className={styles.description}>
           Система предназначена для ведения учета и мониторинга геодезических пунктов.
         </p>
-        <div className={styles.features}>
-          <div className={styles.feature}>
-            <h3>Карта пунктов</h3>
-            <p>Просмотр и анализ расположения геодезических пунктов на карте</p>
-          </div>
-          <div className={styles.feature}>
-            <h3>Карточки обследования</h3>
-            <p>Создание и ведение карточек обследования пунктов</p>
-          </div>
-          <div className={styles.feature}>
-            <h3>Отчеты</h3>
-            <p>Формирование отчетов по результатам обследования</p>
-          </div>
-        </div>
       </div>
+      <AnimatedFeatures />
     </div>
   );
 };

@@ -50,8 +50,8 @@ const radioItems = {
     { value: 'DAMAGED', label: 'Целостность нарушена' }
   ],
   openness: [
-    { value: 'OPEN', label: 'Открыт' },
-    { value: 'CLOSED', label: 'Закрыт' }
+    { value: 'OPEN', label: 'Вскрывался' },
+    { value: 'CLOSED', label: 'Не вскрывался' }
   ],
   readability: [
     { value: 'READABLE', label: 'Читаема' },
@@ -260,7 +260,8 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ federalSubjects }) => {
             
             <hr className={styles.formDivider} />
             
-            <div className={styles.formGroup}>
+         
+              <div className={styles.formGroupforSubj}>
               <Autocomplete
                 name="federalSubject"
                 label="Субъект Российской Федерации"
@@ -273,6 +274,7 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ federalSubjects }) => {
                 value={methods.watch('federalSubject')}
                 onChange={(value) => methods.setValue('federalSubject', value)}
               />
+            
             </div>
             <div className={styles.formGroup}>
             <TextInput
@@ -312,17 +314,47 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ federalSubjects }) => {
                 })}
                 required
                 step="any"
+                helpText={
+                  <>
+                    <p><strong>Что это?</strong></p>
+                    <p>Высота наружного знака в метрах от основания до вершины.</p>
+                  </>
+                }
               />
             </div>
             
             <hr className={styles.formDivider} />
-
+                  <div className={styles.formGroup}>
             <TextInput
               label="Тип центра"
               error={getErrorText(methods.formState.errors.centerType)}
               {...methods.register('centerType')}
-            />
+                helpText={<>
+                      <p><strong>Что это?</strong></p>
+                  <p>Конструкция, закрепляющая точку положения геодезического пункта в грунте. Различается по типам в зависимости от природных условий местности.</p>
+                  
+                  <p><strong>Как определить?</strong></p>
+                  <ol>
+                    <li>Осмотрите конструкцию центра</li>
+                    <li>Определите материал и форму</li>
+                    <li>Сравните с характеристиками:</li>
+                  </ol>
+                  <table className="help-table">
+      <thead>
+        <tr><th>Тип</th><th>Конструкция</th><th>Типичная местность</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1 тип</td><td>Бетонный монолит 20×20 см</td><td>Равнины, устойчивые грунты</td></tr>
+        <tr><td>2 тип</td><td>Скальный знак (металлический штырь в скале)</td><td>Горные районы, скальные породы</td></tr>
+        <tr><td>3 тип</td><td>Труба с якорем (глубина 3-4 м)</td><td>Вечная мерзлота, болотистые почвы</td></tr>
+        <tr><td>4 тип</td><td>Грунтовый репер (металлическая труба 1.5 м)</td><td>Песчаные грунты, зоны подтопления</td></tr>
+      </tbody>
+    </table>
+                </>
 
+                }
+/>
+              </div>
             <div className={styles.formGroup}>
               <TextInput
                 type="number"
@@ -334,13 +366,26 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ federalSubjects }) => {
                 step="any"
               />
             </div>
-
+                 <div className={styles.formGroup}>
             <TextInput
               label="Трапеции"
               error={getErrorText(methods.formState.errors.trapezes)}
               {...methods.register('trapezes')}
+              helpText={
+                <>
+                  <p><strong>Что это?</strong></p>
+                  <p>Номера трапеций топографических карт масштаба 1:50 000 и 1:200 000, на которых расположен пункт.</p>
+                  <p><strong>Как определить?</strong></p>
+                  <ul>
+                    <li>Используйте координаты пункта и специальные картографические сетки</li>
+                    <li>Пример: У-34-37-В (1:50 000), O-37 (1:200 000)</li>
+                    <li>Автоматически определяется по координатам в системе <em>Тип центра</em></li>
+                  </ul>
+                  
+                </>
+              }
             />
-
+            </div>
             <div className={styles.formGroup}>
               <TextInput
                 label="Координаты"
@@ -349,6 +394,20 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ federalSubjects }) => {
                   required: 'Это поле обязательно'
                 })}
                 required
+                helpText={
+                <>
+                  <p><strong>Что это?</strong></p>
+                  <p>Введите координаты пункта в формате ШИРОТА, ДОЛГОТА (например, 55.7558, 37.6173)</p>
+                  <p><strong>Как определить?</strong></p>
+                  <ul>
+                    <li>Чтобы узнать координаты своего текущего местоположения в Яндекс.Картах, кликните правой кнопкой мыши по нужному месту на карте и выберите 'Что здесь?' - координаты отобразятся в карточке объекта. </li>
+                    <li>Если вы не уверены, как вводить, используйте формат с десятичными дробями.</li>
+                    
+                  </ul>
+                  
+                </>
+              }
+              
               />
             </div>
 
@@ -413,7 +472,20 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ federalSubjects }) => {
               required
               value={methods.watch('signPresence')}
               onChange={(value) => methods.setValue('signPresence', value)}
-            />
+              helpText={
+                <>
+                <p><strong>Что это?</strong></p>
+    <p>Информационный знак, устанавливаемый рядом с геодезическим пунктом. Содержит предупреждающую табличку "Геодезический пункт. Охраняется государством".</p>
+    
+    <p><strong>Как определить наличие?</strong></p>
+    <ul>
+      <li>Осмотрите местность в радиусе 1-2 м от центра пункта</li>
+      <li>Ищите столб высотой 1.5-2 м</li>
+      <li>Проверьте наличие металлической таблички</li>
+    </ul>
+                </>
+              }
+/>
 
             <RadioGroup
               name="monolith1Integrity"
@@ -422,7 +494,29 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ federalSubjects }) => {
               required
               value={methods.watch('monolith1Integrity')}
               onChange={(value) => methods.setValue('monolith1Integrity', value)}
-            />
+              helpText={
+                <>
+                <p><strong>Что это?</strong></p>
+    <p>Система бетонных блоков на разной глубине, обеспечивающая долговременную стабильность геодезического пункта.</p>
+    
+    <p><strong>Как проверить состояние?</strong></p>
+    <ol>
+      <li>Определите глубину залегания каждого монолита</li>
+      <li>Проверьте целостность конструкции</li>
+      <li>Фиксируйте повреждения (трещины, сколы)</li>
+    </ol>
+    <div className="monolith-diagram">
+      <p><strong>Схема расположения:</strong></p>
+      <ul>
+        <li>Монолит I: 0.5 м под поверхностью</li>
+        <li>Монолит II: 1.2 м под поверхностью</li>
+        <li>Монолит III: 2.0 м под поверхностью</li>
+        <li>Монолит IV: 3.0 м под поверхностью</li>
+      </ul>
+    </div>
+                </>
+              }
+                              />
 
             <RadioGroup
               name="monolith2Openness"
@@ -449,6 +543,25 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ federalSubjects }) => {
               required
               value={methods.watch('outerSignIntegrity')}
               onChange={(value) => methods.setValue('outerSignIntegrity', value)}
+              helpText={
+                <>
+                <p><strong>Что это?</strong></p>
+    <p>Внешнее сооружение, установленное над центром геодезического пункта для визуального обозначения и защиты.</p>
+    
+    <p><strong>Как опознать:</strong></p>
+    <ul>
+      <li>Определите тип конструкции:
+        <ul>
+          <li>Пирамида (каменная/бетонная)</li>
+          <li>Сигнал (металлическая решетчатая конструкция)</li>
+          <li>Триангуляционная вышка (деревянная/металлическая)</li>
+        </ul>
+      </li>
+      <li>Измерьте высоту сооружения</li>
+      <li>Проверьте устойчивость конструкции</li>
+    </ul>
+                </>
+              }
             />
 
             <RadioGroup
@@ -458,6 +571,26 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ federalSubjects }) => {
               required
               value={methods.watch('orp1Integrity')}
               onChange={(value) => methods.setValue('orp1Integrity', value)}
+              helpText = {
+                <>
+                <p><strong>Что это?</strong></p>
+    <p>Вспомогательные геодезические пункты, расположенные вокруг основного центра для обеспечения точности измерений.</p>
+    
+    <p><strong>Как найти:</strong></p>
+    <ol>
+      <li>От центра пункта отмерьте 500-1000 м по направлениям:
+        <ul>
+          <li>ОРП I: северное направление</li>
+          <li>ОРП II: южное направление</li>
+        </ul>
+      </li>
+      <li>Ищите металлические трубы диаметром 5-7 см</li>
+      <li>На верхнем конце трубы должна быть маркировка</li>
+    </ol>
+    
+   
+                </>
+              }
             />
 
             <RadioGroup
@@ -476,6 +609,25 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ federalSubjects }) => {
               required
               value={methods.watch('trenchReadability')}
               onChange={(value) => methods.setValue('trenchReadability', value)}
+              helpText ={
+                <>
+                <p><strong>Что это?</strong></p>
+    <p>Защитная канава, выкопанная вокруг центра геодезического пункта для его сохранности.</p>
+    
+    <p><strong>Как оценить состояние:</strong></p>
+    <ul>
+      <li>Осмотрите периметр центра пункта</li>
+      <li>Проверьте:
+        <ul>
+          <li>Четкость контуров канавы</li>
+          <li>Глубину (должна быть 0.3-0.5 м)</li>
+          <li>Ширину (должна быть 0.2-0.3 м)</li>
+          <li>Отсутствие зарослей внутри окопки</li>
+        </ul>
+      </li>
+    </ul>
+                </>
+              }
             />
 
             <hr className={styles.formDivider} />
